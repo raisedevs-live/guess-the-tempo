@@ -1,4 +1,18 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
-<%= link_to 'Sign in with Spotify', '/auth/spotify' %>
+<% if current_user.present? %>
+  <p>You're signed in.</p>
+  <% if current_user.spotify_token.blank? %>
+    <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
+  <% else %>
+    <table>
+    <% @spotify_user.saved_tracks.map do |track| %>
+      <tr>
+        <td><%= track.name %></td>
+        <td><%= track.artists.map(&:name).join(', ') %></td>
+        <td><%= track.id %></td>
+        <td><%= @spotify_connection.get("audio-features/#{track.id}").body["tempo"] %></td>
+      </tr>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign up', new_user_session_path %>
+<% end %>
