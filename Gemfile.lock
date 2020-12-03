@@ -180,6 +180,9 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    remote_record (0.1.2)
+      activerecord
+      activesupport
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -256,6 +259,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.0.rc2)
+  remote_record
   rspotify
   sass-rails (>= 6)
   spring

@@ -39,6 +39,8 @@ gem 'rspotify'
 gem 'omniauth'
 gem 'omniauth-spotify'
 
+gem 'remote_record'
+
 gem 'faraday'
 gem 'faraday_middleware'
 

@@ -4,12 +4,12 @@
     <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
   <% else %>
     <table>
-    <% @spotify_user.saved_tracks.map do |track| %>
+    <% @tracks.map do |track| %>
       <tr>
         <td><%= track.name %></td>
-        <td><%= track.artists.map(&:name).join(', ') %></td>
-        <td><%= track.id %></td>
-        <td><%= @spotify_connection.get("audio-features/#{track.id}").body["tempo"] %></td>
+        <td><%= track.artists.map { |a| a['name'] }.join(', ') %></td>
+        <td><%= track.remote_resource_id %></td>
+        <td><%= RemoteRecord::Spotify::Track.tempo_for(track, token: current_user.spotify_token['credentials'].token) %></td>
       </tr>
     <% end %>
   <% end %>
